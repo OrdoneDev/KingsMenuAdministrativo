@@ -1308,6 +1308,8 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         produtos.novoProduto();
         carregarProdutos();
+        index = jtbProdutos.getRowCount() - 1;
+        carregarInformacoesProduto();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jtbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClientesMouseClicked
