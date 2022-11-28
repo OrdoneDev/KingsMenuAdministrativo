@@ -1,18 +1,18 @@
 package com.mycompany.kingsmenuadministrativo.Model;
 
-public class ItemVenda {
+public class ItemVendaModel {
 
     private int idItemVenda;
 
     private double quantidade;
 
-    private Produto produto;
+    private ProdutoModel produto;
     
-    public ItemVenda(){
+    public ItemVendaModel(){
         super();
     }
 
-    public ItemVenda(double quantidade, Produto produto) {
+    public ItemVendaModel(double quantidade, ProdutoModel produto) {
         super();
         this.quantidade = quantidade;
         this.produto = produto;
@@ -26,7 +26,7 @@ public class ItemVenda {
         this.quantidade = quantidade;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(ProdutoModel produto) {
         this.produto = produto;
     }
 
@@ -38,7 +38,7 @@ public class ItemVenda {
         return quantidade;
     }
 
-    public Produto getProduto() {
+    public ProdutoModel getProduto() {
         return produto;
     }
 

@@ -1,16 +1,16 @@
 package com.mycompany.kingsmenuadministrativo.Model;
 
-public class Categorias {
+public class CategoriasModel {
 
     private int idCategoria;
     private String nome;
     private String descrição;
     
-    public Categorias() {
+    public CategoriasModel() {
         super();
     }
 
-    public Categorias(String nome, String descrição) {
+    public CategoriasModel(String nome, String descrição) {
         super();
         this.nome = nome;
         this.descrição = descrição;

@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package com.mycompany.kingsmenuadministrativo.Controller;
 
-import com.mycompany.kingsmenuadministrativo.Model.Venda;
+import com.mycompany.kingsmenuadministrativo.Model.VendaModel;
 import com.mycompany.kingsmenuadministrativo.Resources.ConnectionBD;
 
 import java.sql.Connection;
@@ -20,11 +20,39 @@ import javax.swing.table.TableModel;
  *
  * @author david
  */
-public class Pedidos {
-    public ArrayList<Venda> items;
+public class PedidosControl {
+    public ArrayList<VendaModel> items;
     
-    public Pedidos (){
+    public PedidosControl (){
         items = new ArrayList<>();
+    }
+    
+    public void alterarStatus(int index, boolean proximo){
+        Connection con = ConnectionBD.getConnection();
+        Statement st;
+        ResultSet rs;
+        
+        try {
+            st = con.createStatement();
+            
+            int status_atual = items.get(index).getStatusPedido();
+            
+            if((status_atual == 4 && proximo) || (status_atual == 1 && !proximo))
+                return;
+            
+            status_atual = (proximo ? status_atual + 1 : status_atual - 1);
+            items.get(index).setStatusPedido(status_atual);
+            
+            String script = getScriptUpdate(proximo) + items.get(index).getIdVenda() + ";";
+            st.executeUpdate(script);
+            
+            if (proximo && status_atual == 4){
+                script = getScriptUpdateHoraEntrega(items.get(index).getIdVenda());
+                st.executeUpdate(script);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
     public TableModel getTable(){
@@ -58,6 +86,16 @@ public class Pedidos {
         return null;
     }
     
+    private String getScriptUpdateHoraEntrega(int id_venda) {
+        return "UPDATE VENDA SET data_hora_entrega = now() WHERE ID_VENDA = " + id_venda + ";";
+    }
+    
+    private String getScriptUpdate(boolean proximo){
+        return (proximo ? "UPDATE VENDA SET STATUS_PEDIDO = CAST(STATUS_PEDIDO AS UNSIGNED) "
+                + "+ 1 WHERE ID_VENDA = " : "UPDATE VENDA SET "
+                + "STATUS_PEDIDO = CAST(STATUS_PEDIDO AS UNSIGNED) - 1 WHERE ID_VENDA = ");
+    }
+    
     private String getScriptPedidos(){
         return  "SELECT V.id_venda, C.nome, DATE_FORMAT(V.data_hora_pedido, '%d/%m %H:%i'), \n" +
                 "(V.valor_taxa_entrega + V.valor_total - COALESCE(CD.valor_cupom,0)) AS 'Valor total',\n" +
@@ -69,24 +107,24 @@ public class Pedidos {
                 "ON EE.id_cliente = C.id_cliente\n" +
                 "LEFT JOIN cupom_desconto CD\n" +
                 "ON V.id_cupom = CD.id_cupom\n" +
-                "WHERE V.status_pedido <> 4 AND V.status_pedido IS NOT NULL;";
+                "WHERE (V.status_pedido <> 4 OR TIMESTAMPDIFF(MINUTE, V.data_hora_entrega, now()) < 5) AND V.status_pedido IS NOT NULL\n" +
+                "ORDER BY V.data_hora_pedido;";
     }
     
-    private Venda addItem(ResultSet r) throws Exception{
-        Venda item = new Venda();
+    private VendaModel addItem(ResultSet r) throws Exception{
+        VendaModel item = new VendaModel();
         
         try{
             item.setIdVenda(r.getInt(1));
             item.cliente.setNome(r.getString(2));
             item.setDataHoraPedidoText(r.getString(3));
             item.setValorTotal(r.getDouble(4));
-            
-            String status_pedido = r.getString(5);
+            item.setStatusPedido(r.getInt(5));
 
-            status_pedido = (status_pedido.equals("1") ? 
-                    "Recebido" : (status_pedido.equals("2") ? 
-                    "Preparação" : (status_pedido.equals("3") 
-                    ? "Rota de entrega" : "Finalizado")));
+            String status_pedido = (item.getStatusPedido() == 1 ? 
+                    "Recebido" : (item.getStatusPedido() == 2 ? 
+                    "Preparação" : (item.getStatusPedido() == 3 ? 
+                    "Rota de entrega" : "Finalizado")));
             
             item.setStatusPedidoText(status_pedido);
             

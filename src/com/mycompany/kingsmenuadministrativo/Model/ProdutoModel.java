@@ -1,6 +1,6 @@
 package com.mycompany.kingsmenuadministrativo.Model;
 
-public class Produto {
+public class ProdutoModel {
 
     private int idProduto;
 
@@ -14,17 +14,22 @@ public class Produto {
 
     private byte foto;
     
-    public Produto(){
+    private CategoriasModel categoria;
+    
+    public ProdutoModel(){
         super();
+        
+        categoria = new CategoriasModel();
     }
 
-    public Produto(String nome, String descricao, double valor, float estoque, byte foto) {
+    public ProdutoModel(String nome, String descricao, double valor, float estoque, byte foto, CategoriasModel categoria) {
         super();
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
         this.estoque = estoque;
         this.foto = foto;
+        this.categoria = categoria;
     }
 
     public void setIdProduto(int idProduto) {
@@ -51,6 +56,10 @@ public class Produto {
         this.foto = foto;
     }
 
+    public void setCategoria(CategoriasModel categoria) {
+        this.categoria = categoria;
+    }
+
     public int getIdProduto() {
         return idProduto;
     }
@@ -74,6 +83,10 @@ public class Produto {
     public byte getFoto() {
         return foto;
     }    
+
+    public CategoriasModel getCategoria() {
+        return categoria;
+    }
 
     public void manter() {
         //TODO CRUD

@@ -3,7 +3,7 @@ package com.mycompany.kingsmenuadministrativo.Model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Venda {
+public class VendaModel {
 
     private int idVenda;
 
@@ -13,7 +13,7 @@ public class Venda {
 
     private LocalDateTime dataHoraEntrega;
 
-    private char statusPedido;
+    private int statusPedido;
     
     private String statusPedidoText;
 
@@ -23,18 +23,18 @@ public class Venda {
 
     private float valorTaxaEntrega;
 
-    public ArrayList<ItemVenda> itemVenda;
+    public ArrayList<ItemVendaModel> itemVenda;
 
-    public Cliente cliente;
+    public ClienteModel cliente;
     
-    public Venda(){
+    public VendaModel(){
         super();
         
         itemVenda = new ArrayList<>();
-        cliente = new Cliente();
+        cliente = new ClienteModel();
     }
     
-    public Venda(LocalDateTime dataHoraPedido, LocalDateTime dataHoraEntrega, char statusPedido, double valorTotal, int idEnderecoEntrega, float valorTaxaEntrega, ArrayList<ItemVenda> itemVenda, Cliente cliente) {
+    public VendaModel(LocalDateTime dataHoraPedido, LocalDateTime dataHoraEntrega, int statusPedido, double valorTotal, int idEnderecoEntrega, float valorTaxaEntrega, ArrayList<ItemVendaModel> itemVenda, ClienteModel cliente) {
         super();
         this.dataHoraPedido = dataHoraPedido;
         this.dataHoraEntrega = dataHoraEntrega;
@@ -62,7 +62,7 @@ public class Venda {
         this.dataHoraEntrega = dataHoraEntrega;
     }
 
-    public void setStatusPedido(char statusPedido) {
+    public void setStatusPedido(int statusPedido) {
         this.statusPedido = statusPedido;
     }
 
@@ -98,7 +98,7 @@ public class Venda {
         return dataHoraEntrega;
     }
 
-    public char getStatusPedido() {
+    public int getStatusPedido() {
         return statusPedido;
     }
 

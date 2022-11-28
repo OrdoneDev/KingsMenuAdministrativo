@@ -2,21 +2,23 @@ package com.mycompany.kingsmenuadministrativo.Model;
 
 import java.util.Date;
 
-public class CupomDesconto {
+public class CupomDescontoModel {
 
     private int idCupom;
 
     private Date dataValidade;
+    
+    private String dataValidadeText;
 
     private float valorCupom;
 
     private String cupom;
     
-    public CupomDesconto(){
+    public CupomDescontoModel(){
         super();
     }
 
-    public CupomDesconto(Date dataValidade, float valorCupom, String cupom) {
+    public CupomDescontoModel(Date dataValidade, float valorCupom, String cupom) {
         super();
         this.dataValidade = dataValidade;
         this.valorCupom = valorCupom;
@@ -29,6 +31,10 @@ public class CupomDesconto {
 
     public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
+    }
+
+    public void setDataValidadeText(String dataValidadeText) {
+        this.dataValidadeText = dataValidadeText;
     }
 
     public void setValorCupom(float valorCupom) {
@@ -45,6 +51,10 @@ public class CupomDesconto {
 
     public Date getDataValidade() {
         return dataValidade;
+    }
+
+    public String getDataValidadeText() {
+        return dataValidadeText;
     }
 
     public float getValorCupom() {

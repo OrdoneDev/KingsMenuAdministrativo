@@ -1,8 +1,9 @@
 package com.mycompany.kingsmenuadministrativo.Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Cliente {
+public class ClienteModel {
 
     private int idCliente;
 
@@ -18,13 +19,15 @@ public class Cliente {
 
     private Date dataNascimento;
 
-    private Endereco[] endereco;
+    private ArrayList<EnderecoModel> endereco;
     
-    public Cliente(){
+    public ClienteModel(){
         super();
+        
+        endereco = new ArrayList<>();
     }
 
-    public Cliente(String nome, String cpf, String telefone, String email, String senha, Date dataNascimento, Endereco[] endereco) {
+    public ClienteModel(String nome, String cpf, String telefone, String email, String senha, Date dataNascimento, ArrayList<EnderecoModel> endereco) {
         super();
         this.nome = nome;
         this.cpf = cpf;
@@ -63,7 +66,7 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    public void setEndereco(Endereco[] endereco) {
+    public void setEndereco(ArrayList<EnderecoModel> endereco) {
         this.endereco = endereco;
     }
 
@@ -95,7 +98,7 @@ public class Cliente {
         return dataNascimento;
     }
 
-    public Endereco[] getEndereco() {
+    public ArrayList<EnderecoModel> getEndereco() {
         return endereco;
     }
             

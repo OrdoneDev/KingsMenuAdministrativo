@@ -1,6 +1,6 @@
 package com.mycompany.kingsmenuadministrativo.Model;
 
-public class Endereco {
+public class EnderecoModel {
 
     private int idEndereco;
 
@@ -18,11 +18,11 @@ public class Endereco {
 
     private String complemento;
     
-    public Endereco(){
+    public EnderecoModel(){
         super();
     }
 
-    public Endereco(String estado, String cidade, String cep, String rua, String bairro, String numero, String complemento) {
+    public EnderecoModel(String estado, String cidade, String cep, String rua, String bairro, String numero, String complemento) {
         super();
         this.estado = estado;
         this.cidade = cidade;
