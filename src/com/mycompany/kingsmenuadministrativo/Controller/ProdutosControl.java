@@ -25,32 +25,49 @@ public class ProdutosControl {
         items = new ArrayList<>();
     }
     
-    public void alterarStatus(int index, boolean proximo){
-        /*Connection con = ConnectionBD.getConnection();
+    public void novoProduto(){
+        Connection con = ConnectionBD.getConnection();
         Statement st;
         ResultSet rs;
         
         try {
             st = con.createStatement();
-            
-            int status_atual = items.get(index).getStatusPedido();
-            
-            if((status_atual == 4 && proximo) || (status_atual == 1 && !proximo))
-                return;
-            
-            status_atual = (proximo ? status_atual + 1 : status_atual - 1);
-            items.get(index).setStatusPedido(status_atual);
-            
-            String script = getScriptUpdate(proximo) + items.get(index).getIdVenda() + ";";
-            st.executeUpdate(script);
-            
-            if (proximo && status_atual == 4){
-                script = getScriptUpdateHoraEntrega(items.get(index).getIdVenda());
-                st.executeUpdate(script);
-            }
+              
+            String script = getScriptNovoProduto();
+            st.execute(script);
         }catch(Exception ex){
             ex.printStackTrace();
-        }*/
+        }
+    }
+    
+    private void atualizarProduto(ProdutoModel produto){
+        Connection con = ConnectionBD.getConnection();
+        Statement st;
+        ResultSet rs;
+        
+        try {
+            st = con.createStatement();
+              
+            String script = getScriptAtualizaProduto(produto);
+            st.executeUpdate(script);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void deletarProduto(int index){
+        Connection con = ConnectionBD.getConnection();
+        Statement st;
+        ResultSet rs;
+        
+        try {
+            st = con.createStatement();
+              
+            String script = getScriptDeleteProduto(items.get(index).getIdProduto());
+            st.executeUpdate(script);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
     public TableModel getTable(){
@@ -82,19 +99,29 @@ public class ProdutosControl {
         return null;
     }
     
+    public void setProduto(int index, ProdutoModel produto){
+        items.set(index, produto);
+        atualizarProduto(produto);
+    }
+    
     public ProdutoModel getProduto(int index){
         return items.get(index);
     }
     
-    /*private String getScriptUpdateHoraEntrega(int id_venda) {
-        return "UPDATE VENDA SET data_hora_entrega = now() WHERE ID_VENDA = " + id_venda + ";";
+    private String getScriptNovoProduto(){
+        return "INSERT INTO PRODUTO (`nome`, `descricao`, `valor`) VALUES ('Novo', '', 0);";
+    }
+            
+    private String getScriptAtualizaProduto(ProdutoModel produto) {
+        return "UPDATE PRODUTO SET nome = '" + produto.getNome() +
+                "', descricao = '" + produto.getDescricao() + 
+                "', valor = " + produto.getValor() +
+                " WHERE id_produto = " + produto.getIdProduto() + ";";
     }
     
-    private String getScriptUpdate(boolean proximo){
-        return (proximo ? "UPDATE VENDA SET STATUS_PEDIDO = CAST(STATUS_PEDIDO AS UNSIGNED) "
-                + "+ 1 WHERE ID_VENDA = " : "UPDATE VENDA SET "
-                + "STATUS_PEDIDO = CAST(STATUS_PEDIDO AS UNSIGNED) - 1 WHERE ID_VENDA = ");
-    }*/
+    private String getScriptDeleteProduto(int id_produto) {
+        return "DELETE FROM produto WHERE id_produto = " + id_produto + ";";
+    }
     
     private String getScriptProdutos(){
         return  "SELECT P.id_produto, C.id_categoria, P.foto, P.nome, P.descricao, P.valor, " +

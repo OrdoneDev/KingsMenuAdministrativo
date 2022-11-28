@@ -73,7 +73,7 @@ public class PedidosControl {
                 modelo.addRow(new String[] {
                     items.get(index).cliente.getNome(),
                     items.get(index).getDataHoraPedidoText(),
-                    "R$ " + new DecimalFormat("#.00").format(items.get(index).getValorTotal()),
+                    "R$ " + new DecimalFormat("0.00").format(items.get(index).getValorTotal()),
                     items.get(index).getStatusPedidoText()
                 });
             

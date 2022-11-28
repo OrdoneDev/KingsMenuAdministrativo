@@ -10,7 +10,11 @@ import java.awt.Color;
 import java.awt.Point;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,17 +22,16 @@ import java.text.SimpleDateFormat;
  */
 public class Home extends javax.swing.JFrame {
     private Point point = new Point();
-    PedidosControl pedidos;
-    ProdutosControl produtos;
-    CuponsControl cupons;
-    ClientesControl clientes;
+    private PedidosControl pedidos;
+    private ProdutosControl produtos;
+    private CuponsControl cupons;
+    private ClientesControl clientes;
     private int index;
     /**
      * Creates new form Home
      */
     
     public Home() {
-        index = -1;
         initComponents();
         resetPanel();
 
@@ -630,6 +633,11 @@ public class Home extends javax.swing.JFrame {
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.setFocusPainted(false);
         jButton6.setPreferredSize(new java.awt.Dimension(120, 24));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(236, 160, 0));
         jButton7.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
@@ -639,6 +647,11 @@ public class Home extends javax.swing.JFrame {
         jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton7.setFocusPainted(false);
         jButton7.setPreferredSize(new java.awt.Dimension(120, 24));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setBackground(new java.awt.Color(228, 106, 79));
         jButton8.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
@@ -648,6 +661,11 @@ public class Home extends javax.swing.JFrame {
         jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton8.setFocusPainted(false);
         jButton8.setPreferredSize(new java.awt.Dimension(120, 24));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jcmbCategoria.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jcmbCategoria.setForeground(new java.awt.Color(70, 73, 75));
@@ -900,6 +918,11 @@ public class Home extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbClientesMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jtbClientes);
 
         jLabel15.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
@@ -1254,9 +1277,49 @@ public class Home extends javax.swing.JFrame {
     private void jtbCuponsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCuponsMouseClicked
         // TODO add your handling code here:
         index = jtbCupons.getSelectedRow();
+        
+        carregarInformacoesCupons();
     }//GEN-LAST:event_jtbCuponsMouseClicked
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        if (index > -1){
+            int i = JOptionPane.showConfirmDialog(null,  "Você realmenter que apagar este produto?", "Apagar?", JOptionPane.YES_NO_OPTION);
+
+            if(i == 0){
+                produtos.deletarProduto(index);
+                carregarProdutos();
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(index > -1){
+            try {
+                atualizarInformacoesProduto();
+            } catch (ParseException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            carregarProdutos();
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        produtos.novoProduto();
+        carregarProdutos();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jtbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClientesMouseClicked
+        // TODO add your handling code here:
+        index = jtbClientes.getSelectedRow();
+        
+        carregarInformacoesClientes();
+    }//GEN-LAST:event_jtbClientesMouseClicked
+
      private void resetPanel(){
+        index = -1;
+
         jPedidos.setVisible(false);
         jProdutos.setVisible(false);
         jCupons.setVisible(false);
@@ -1267,6 +1330,17 @@ public class Home extends javax.swing.JFrame {
         produtos = null;
         cupons = null;
         clientes = null;
+    }
+     
+    private void atualizarInformacoesProduto() throws ParseException{
+        ProdutoModel produto_temp = produtos.getProduto(index);
+        
+        //produto_temp.setFoto();
+        produto_temp.setNome(jtxNome.getText());
+        produto_temp.setDescricao(jtxDescricao.getText());
+        produto_temp.setValor(DecimalFormat.getNumberInstance().parse(jtxValor.getText()).doubleValue());
+        
+        produtos.setProduto(index, produto_temp);
     }
      
     private void carregarInformacoesClientes(){
@@ -1286,7 +1360,7 @@ public class Home extends javax.swing.JFrame {
         CupomDescontoModel cupom = cupons.getCupom(index);
         
         jtxCupom.setText(cupom.getCupom());
-        jtxValorCupom.setText(new DecimalFormat("#.00").format(cupom.getValorCupom()));
+        jtxValorCupom.setText(new DecimalFormat("0.00").format(cupom.getValorCupom()));
         jtxValidadeCupom.setText(cupom.getDataValidadeText());
     }
      
@@ -1295,7 +1369,7 @@ public class Home extends javax.swing.JFrame {
         
         //jlblFoto
         jtxNome.setText(produto.getNome());
-        jtxValor.setText(new DecimalFormat("#.00").format(produto.getValor()));
+        jtxValor.setText(new DecimalFormat("0.00").format(produto.getValor()));
         jtxDescricao.setText(produto.getDescricao());
         jcmbCategoria.removeAllItems();
         jcmbCategoria.addItem(produto.getCategoria().getNome());
