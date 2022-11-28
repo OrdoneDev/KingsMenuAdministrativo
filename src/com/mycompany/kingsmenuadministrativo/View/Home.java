@@ -153,13 +153,13 @@ public class Home extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\imagens\\logo-resized.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\imagens\\logo-resized.png")); // NOI18N
         jLabel2.setText("Kings Menu");
 
         jButton1.setBackground(new java.awt.Color(236, 160, 0));
         jButton1.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\icons\\pedidos.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\pedidos.png")); // NOI18N
         jButton1.setText("Pedidos");
         jButton1.setBorderPainted(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -183,7 +183,7 @@ public class Home extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(236, 160, 0));
         jButton3.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\icons\\produtos.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\produtos.png")); // NOI18N
         jButton3.setText("Produtos");
         jButton3.setBorderPainted(false);
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -207,7 +207,7 @@ public class Home extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(236, 160, 0));
         jButton4.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\icons\\cupons.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\cupons.png")); // NOI18N
         jButton4.setText("Cupons");
         jButton4.setBorderPainted(false);
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -231,7 +231,7 @@ public class Home extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(236, 160, 0));
         jButton5.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\icons\\clientes.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\clientes.png")); // NOI18N
         jButton5.setText("Clientes");
         jButton5.setBorderPainted(false);
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -255,7 +255,7 @@ public class Home extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(228, 106, 79));
         jButton2.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\icons\\fechar.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\fechar.png")); // NOI18N
         jButton2.setText("Sair");
         jButton2.setBorderPainted(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -599,7 +599,7 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jtbProdutos);
 
-        jlblFoto.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\KingsMenuAdministrativo\\imagens\\foto.png")); // NOI18N
+        jlblFoto.setIcon(new javax.swing.ImageIcon("C:\\Users\\david\\Documents\\NetBeansProjects\\KingsMenuAdministrativo\\icons\\foto.png")); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(91, 95, 99));
